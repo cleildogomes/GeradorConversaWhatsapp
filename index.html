@@ -54,7 +54,7 @@
 function iniciarConversa() {
     var nome = document.getElementById('nome').value;
     var numeroTelefone = document.getElementById('numeroTelefone').value;
-    var mensagem = encodeURIComponent(`Olá, aqui é ${nome} do SUPORTE-TI-TCERO, referente ao seu chamado!`);
+    var mensagem = encodeURIComponent(`Olá, aqui é ${nome} do Suporte de TI do TCE-RO, referente ao seu chamado!`);
     var whatsappUrl = `https://wa.me/55${numeroTelefone}?text=${mensagem}`;
 
     window.open(whatsappUrl, '_blank');
