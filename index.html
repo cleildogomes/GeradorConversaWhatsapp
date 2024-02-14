@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Conversa no WhatsApp</title>
+    <style>
+        body {
+            background-color: #336de9; /* Cor de fundo da página */
+            font-family: Arial, sans-serif; /* Tipo de fonte */
+        }
+
+        input, button {
+            
+            font-size: 16px; /* Tamanho da letra para inputs e botão */
+            margin: 10px 0; /* Margem entre os elementos */
+        }
+
+        input {
+            width: 300px; /* Largura dos campos de entrada */
+            padding: 10px; /* Espaçamento interno dos campos de entrada */
+            border-radius: 5px; /* Bordas arredondadas dos campos de entrada */
+            border: 1px solid #ddd; /* Cor da borda dos campos de entrada */
+        }
+
+        button {
+            
+            width: 320px; /* Largura do botão */
+            padding: 10px; /* Espaçamento interno do botão */
+            background-color: #02316b; /* Cor de fundo do botão */
+            color: white; /* Cor da letra do botão */
+            border: none; /* Remove a borda do botão */
+            border-radius: 5px; /* Bordas arredondadas do botão */
+            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+<center>
+<h1>Gerador de conversa no WhatsApp</h1>
+<input type="text" id="nome" placeholder="Digite seu nome">
+<input type="text" id="numeroTelefone" placeholder="Digite o número com DDD">
+</center>
+<center>
+<button onclick="iniciarConversa()">Iniciar Conversa</button>
+</center>
+
+
+<script>
+function iniciarConversa() {
+    var nome = document.getElementById('nome').value;
+    var numeroTelefone = document.getElementById('numeroTelefone').value;
+    var mensagem = encodeURIComponent(`Olá, aqui é ${nome} do SUPORTE-TI-TCERO, referente ao seu chamado!`);
+    var whatsappUrl = `https://wa.me/55${numeroTelefone}?text=${mensagem}`;
+
+    window.open(whatsappUrl, '_blank');
+}
+</script>
+
+</body>
+</html>
