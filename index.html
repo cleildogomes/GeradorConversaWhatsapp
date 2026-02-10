@@ -1,66 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    
-    <title>Iniciar Conversa no WhatsApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGS Tecnologia - Suporte WhatsApp</title>
     <style>
-        body {
-            background-color: #336de9; /* Cor de fundo da página */
-            font-family: Arial, sans-serif; /* Tipo de fonte */
+        /* Reset básico para garantir que o layout fique igual em todos os browsers */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        input, button {
-            
-            font-size: 16px; /* Tamanho da letra para inputs e botão */
-            margin: 10px 0; /* Margem entre os elementos */
+        body {
+            background-color: #336de9;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ocupa a altura total da tela */
+        }
+
+        /* Container centralizado */
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #02316b;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        img {
+            margin-bottom: 20px;
         }
 
         input {
-            width: 300px; /* Largura dos campos de entrada */
-            padding: 10px; /* Espaçamento interno dos campos de entrada */
-            border-radius: 5px; /* Bordas arredondadas dos campos de entrada */
-            border: 1px solid #ddd; /* Cor da borda dos campos de entrada */
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
         }
 
         button {
-            
-            width: 320px; /* Largura do botão */
-            padding: 10px; /* Espaçamento interno do botão */
-            background-color: #02316b; /* Cor de fundo do botão */
-            color: white; /* Cor da letra do botão */
-            border: none; /* Remove a borda do botão */
-            border-radius: 5px; /* Bordas arredondadas do botão */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #02316b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
         button:hover {
-            background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-<center>
-<h1>CGS Tecnologia</h1>
-<img src="whatsapp.png" alt="Imagem" width="100">
 
-<h1>Gerador de conversa no WhatsApp</h1>
-<input type="text" id="nome" placeholder="Digite seu nome">
-<input type="text" id="numeroTelefone" placeholder="Digite o número com DDD">
-</center>
-<center>
-<button onclick="iniciarConversa()">Iniciar Conversa</button>
-</center>
+<div class="container">
+    <h1>CGS Tecnologia</h1>
+    <img src="whatsapp.png" alt="WhatsApp Logo" width="80">
 
+    <h2>Gerador de Chamados</h2>
+    
+    <input type="text" id="nome" placeholder="Digite seu nome (Suporte)">
+    <input type="text" id="numeroTelefone" placeholder="Número com DDD (ex: 69988776655)">
+    
+    <button onclick="iniciarConversa()">Iniciar Conversa</button>
+</div>
 
 <script>
 function iniciarConversa() {
-    var nome = document.getElementById('nome').value;
-    var numeroTelefone = document.getElementById('numeroTelefone').value;
-    var mensagem = encodeURIComponent(`Olá, aqui é ${nome} do Suporte de TI do TCE-RO, referente ao seu chamado!`);
-    var whatsappUrl = `https://api.whatsapp.com/send?phone=55${numeroTelefone}?text=${mensagem}`;
+    // 1. Captura os valores dos inputs
+    var nome = document.getElementById('nome').value.trim();
+    var numeroRaw = document.getElementById('numeroTelefone').value.trim();
 
-    window.open(whatsappUrl, '_blank');
+    // 2. Validação simples: verifica se os campos estão vazios
+    if (nome === "" || numeroRaw === "") {
+        alert("Por favor, preencha o nome e o número de telefone.");
+        return; // Interrompe a função aqui
+    }
+
+    // 3. Limpeza do número: remove qualquer caractere que não seja número
+    var numeroLimpo = numeroRaw.replace(/\D/g, '');
+
+    // 4. Criação da mensagem e URL
+    var mensagem = encodeURIComponent(`Olá, aqui é ${nome} do Suporte de TI do TCE-RO, referente ao seu chamado!`);
+    
+    // Adicionamos o 55 (Brasil) apenas se o usuário já não tiver colocado
+    var prefixoBrasil = "55";
+    var urlFinal = `https://api.whatsapp.com/send?phone=${prefixoBrasil}${numeroLimpo}&text=${mensagem}`;
+
+    // 5. Abre em uma nova aba
+    window.open(urlFinal, '_blank');
 }
 </script>
 
